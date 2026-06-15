@@ -1,0 +1,34 @@
+<footer class="bg-dark text-light py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5><i class="bi bi-journal-code me-2"></i>Django Блог</h5>
+                <p class="text-muted mb-0">Современное блог-приложение на Django и Bootstrap 5. Учитесь, делитесь, общайтесь.</p>
+            </div>
+            <div class="col-md-3">
+                <h6>Навигация</h6>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'home' %}" class="text-decoration-none text-muted">Главная</a></li>
+                    <li><a href="{% url 'blog:post_list' %}" class="text-decoration-none text-muted">Блог</a></li>
+                    <li><a href="{% url 'blog:about' %}" class="text-decoration-none text-muted">О проекте</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6>Аккаунт</h6>
+                <ul class="list-unstyled">
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'accounts:profile' %}" class="text-decoration-none text-muted">Профиль</a></li>
+                    <li><a href="{% url 'accounts:logout' %}" class="text-decoration-none text-muted">Выйти</a></li>
+                    {% else %}
+                    <li><a href="{% url 'accounts:login' %}" class="text-decoration-none text-muted">Войти</a></li>
+                    <li><a href="{% url 'accounts:register' %}" class="text-decoration-none text-muted">Регистрация</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <hr class="my-3 border-secondary">
+        <div class="text-center text-muted">
+            <small>&copy; {% now "Y" %} Django Блог. Создан на Django & Bootstrap 5.</small>
+        </div>
+    </div>
+</footer>

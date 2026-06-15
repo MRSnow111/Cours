@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Главная - Django Блог{% endblock %}
+
+{% block content %}
+<!-- Главный баннер -->
+<div class="bg-primary text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-3">Добро пожаловать в Django Блог</h1>
+                <p class="lead mb-4">Современное блог-приложение на Django. Создавайте, делитесь и открывайте интересный контент. Отличный способ изучить веб-разработку на Python.</p>
+                <div class="d-flex gap-3">
+                    <a href="{% url 'blog:post_list' %}" class="btn btn-light btn-lg">
+                        <i class="bi bi-journal-text me-2"></i>Читать записи
+                    </a>
+                    {% if not user.is_authenticated %}
+                    <a href="{% url 'accounts:register' %}" class="btn btn-outline-light btn-lg">
+                        <i class="bi bi-person-plus me-2"></i>Начать
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-4 d-none d-lg-block text-center">
+                <i class="bi bi-journal-code display-1 opacity-50"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Возможности -->
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="text-primary mb-3">
+                        <i class="bi bi-pencil-square display-4"></i>
+                    </div>
+                    <h5 class="card-title">Создавайте записи</h5>
+                    <p class="card-text text-muted">Пишите и публикуйте собственные записи. Добавляйте теги для удобной навигации.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="text-success mb-3">
+                        <i class="bi bi-chat-dots display-4"></i>
+                    </div>
+                    <h5 class="card-title">Общайтесь</h5>
+                    <p class="card-text text-muted">Оставляйте комментарии и участвуйте в обсуждениях. Находите единомышленников.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="text-info mb-3">
+                        <i class="bi bi-shield-check display-4"></i>
+                    </div>
+                    <h5 class="card-title">Безопасность</h5>
+                    <p class="card-text text-muted">Встроенная система аутентификации с профилями, аватарами и восстановлением пароля.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Последние записи -->
+<div class="bg-light py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="bi bi-clock-history me-2"></i>Последние записи</h2>
+            <a href="{% url 'blog:post_list' %}" class="btn btn-primary">
+                Все записи <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+        </div>
+        {% load blog_tags %}
+        {% show_latest_posts 3 %}
+    </div>
+</div>
+
+<!-- Технологии -->
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h2>Современный технологический стек</h2>
+        <p class="text-muted">Проект демонстрирует лучшие практики веб-разработки</p>
+    </div>
+    <div class="row justify-content-center g-3">
+        <div class="col-6 col-md-3 col-lg-2">
+            <div class="card text-center border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <i class="bi bi-filetype-py display-5 text-primary"></i>
+                    <h6 class="mt-2 mb-0">Python 3.10+</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2">
+            <div class="card text-center border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <i class="bi bi-globe display-5 text-success"></i>
+                    <h6 class="mt-2 mb-0">Django</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2">
+            <div class="card text-center border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <i class="bi bi-bootstrap display-5" style="color: #7952b3;"></i>
+                    <h6 class="mt-2 mb-0">Bootstrap 5</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2">
+            <div class="card text-center border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <i class="bi bi-database display-5 text-warning"></i>
+                    <h6 class="mt-2 mb-0">SQLite</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
